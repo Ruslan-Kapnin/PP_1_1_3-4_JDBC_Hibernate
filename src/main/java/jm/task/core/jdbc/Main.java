@@ -9,6 +9,7 @@ public class Main {
     public static void main(String[] args) {
         // реализуйте алгоритм здесь
         UserDaoJDBCImpl userDaoJDBC = new UserDaoJDBCImpl();
-        userDaoJDBC.createUsersTable();
+        //userDaoJDBC.saveUser("dego", "grand", (byte) 12);
+        userDaoJDBC.getAllUsers();
     }
 }
