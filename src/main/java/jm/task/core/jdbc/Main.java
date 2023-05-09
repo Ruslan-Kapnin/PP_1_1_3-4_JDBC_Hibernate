@@ -13,7 +13,7 @@ public class Main {
             String lastName = "lastName" + i;
             byte age = (byte)(i*5);
             userService.saveUser(name, lastName, age);
-            System.out.printf("User с именем - %s добавлен в базу данных%n", name);
+            System.out.printf("User с именем %s добавлен в базу данных%n", name);
         }
 
         userService.getAllUsers().forEach(System.out::println);
