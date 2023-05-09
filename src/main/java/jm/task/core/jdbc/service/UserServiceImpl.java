@@ -4,10 +4,12 @@ import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.util.Util;
 
 import java.sql.Connection;
+import java.sql.*;
+import java.sql.SQLException;
 import java.util.List;
 
 public class UserServiceImpl implements UserService {
-    private Connection connection = Util.getConnection();
+
     public void createUsersTable() {
 
     }
