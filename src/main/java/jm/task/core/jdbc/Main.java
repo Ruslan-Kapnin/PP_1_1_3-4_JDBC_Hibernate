@@ -1,7 +1,4 @@
 package jm.task.core.jdbc;
-
-import jm.task.core.jdbc.dao.UserDaoJDBCImpl;
-import jm.task.core.jdbc.model.User;
 import jm.task.core.jdbc.service.UserServiceImpl;
 
 
@@ -14,7 +11,7 @@ public class Main {
         for (int i = 0; i < 4; i++) {
             String name = "name" + i;
             String lastName = "lastName" + i;
-            Byte age = (byte)(i*5);
+            byte age = (byte)(i*5);
             userService.saveUser(name, lastName, age);
             System.out.printf("User с именем - %s добавлен в базу данных%n", name);
         }
