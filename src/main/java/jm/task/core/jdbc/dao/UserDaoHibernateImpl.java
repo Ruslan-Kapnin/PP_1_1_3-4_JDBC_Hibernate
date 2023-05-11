@@ -5,8 +5,8 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.Query;
+import org.hibernate.query.NativeQuery;
+
 
 import javax.persistence.RollbackException;
 import javax.persistence.criteria.CriteriaBuilder;
@@ -65,7 +65,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
         try (Session session = sessionFactory.openSession()){
             session.beginTransaction();
-            Query query = session.createSQLQuery("insert into Users (Name, LastName, Age) values (?,?,?)");
+            NativeQuery query = session.createSQLQuery("insert into Users (Name, LastName, Age) values (?,?,?)");
             query.setParameter(1, name);
             query.setParameter(2, lastName);
             query.setParameter(3, age);
