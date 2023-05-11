@@ -5,12 +5,11 @@ import jm.task.core.jdbc.util.Util;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.query.NativeQuery;
+
 
 
 import javax.persistence.RollbackException;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -65,11 +64,7 @@ public class UserDaoHibernateImpl implements UserDao {
     public void saveUser(String name, String lastName, byte age) {
         try (Session session = sessionFactory.openSession()){
             session.beginTransaction();
-            NativeQuery query = session.createSQLQuery("insert into Users (Name, LastName, Age) values (?,?,?)");
-            query.setParameter(1, name);
-            query.setParameter(2, lastName);
-            query.setParameter(3, age);
-            query.executeUpdate();
+            session.save(new User(name, lastName, age));
             session.getTransaction().commit();
         } catch (RollbackException e){
             try {
@@ -108,10 +103,8 @@ public class UserDaoHibernateImpl implements UserDao {
         List<User> userList = new ArrayList<>();
         try (Session session = sessionFactory.openSession()){
             session.beginTransaction();
-            CriteriaBuilder builder = session.getCriteriaBuilder();
-            CriteriaQuery<User> criteria = builder.createQuery(User.class);
-            criteria.from(User.class);
-            userList = session.createQuery(criteria).getResultList();
+            TypedQuery<User> query = session.createQuery("from User", User.class);
+            userList = query.getResultList();
             session.getTransaction().commit();
         } catch (RollbackException e){
             try {
