@@ -7,7 +7,6 @@ public class Main {
         UserServiceImpl userService = new UserServiceImpl();
 
         userService.createUsersTable();
-
         for (int i = 0; i < 4; i++) {
             String name = "name" + i;
             String lastName = "lastName" + i;
@@ -15,11 +14,8 @@ public class Main {
             userService.saveUser(name, lastName, age);
             System.out.printf("User с именем %s добавлен в базу данных%n", name);
         }
-
         userService.getAllUsers().forEach(System.out::println);
-
         userService.cleanUsersTable();
-
         userService.dropUsersTable();
     }
 }
